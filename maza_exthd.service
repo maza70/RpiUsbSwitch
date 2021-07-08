@@ -1,0 +1,23 @@
+## sudo ln -sf /home/pi/services/exthd/maza_exthd.service   /etc/systemd/system/maza_exthd.service
+## sudo systemctl daemon-reload
+## sudo systemctl enable maza_exthd.service
+## sudo systemctl start maza_exthd.service
+## sudo systemctl stop maza_exthd.service
+## sudo systemctl is-enabled maza_exthd.service
+## https://www.freedesktop.org/software/systemd/man/systemd.directives.html
+
+[Unit]
+Description=control power of the external 3.5" Hd
+# After=network.target
+# Before=smbd.service
+
+[Service]
+User=root
+Type=simple
+WorkingDirectory=/home/pi/services/exthd
+ExecStart=/home/pi/services/exthd/maza_exthd.sh
+KillSignal=SIGTERM
+SyslogIdentifier=maza_exthd
+
+[Install]
+WantedBy=multi-user.target smbd.service
